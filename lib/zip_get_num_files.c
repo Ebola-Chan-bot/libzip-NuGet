@@ -1,6 +1,6 @@
 /*
   zip_get_num_files.c -- get number of files in archive
-  Copyright (C) 1999-2021 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2022 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -32,6 +32,7 @@
 */
 
 
+/* LCOV_EXCL_START */
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 #include <limits.h>
@@ -49,3 +50,4 @@ zip_get_num_files(zip_t *za) {
 
     return (int)za->nentry;
 }
+/* LCOV_EXCL_STOP */

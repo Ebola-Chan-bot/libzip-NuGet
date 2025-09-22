@@ -1,6 +1,6 @@
 /*
   zip_file_replace.c -- replace file via callback function
-  Copyright (C) 1999-2021 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2024 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -83,21 +83,15 @@ _zip_file_replace(zip_t *za, zip_uint64_t idx, const char *name, zip_source_t *s
         return -1;
     }
 
+    /* delete all extra fields - these are usually data that are
+     * strongly coupled with the original data */
+    if (zip_file_extra_field_delete(za, idx, ZIP_EXTRA_FIELD_ALL, ZIP_FL_CENTRAL | ZIP_FL_LOCAL) < 0) {
+        return -1;
+    }
+
     /* does not change any name related data, so we can do it here;
      * needed for a double add of the same file name */
     _zip_unchange_data(za->entry + idx);
-
-    if (za->entry[idx].orig != NULL && (za->entry[idx].changes == NULL || (za->entry[idx].changes->changed & ZIP_DIRENT_COMP_METHOD) == 0)) {
-        if (za->entry[idx].changes == NULL) {
-            if ((za->entry[idx].changes = _zip_dirent_clone(za->entry[idx].orig)) == NULL) {
-                zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
-                return -1;
-            }
-        }
-
-        za->entry[idx].changes->comp_method = ZIP_CM_REPLACED_DEFAULT;
-        za->entry[idx].changes->changed |= ZIP_DIRENT_COMP_METHOD;
-    }
 
     za->entry[idx].source = source;
 

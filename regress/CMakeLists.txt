@@ -5,7 +5,6 @@ set(TEST_PROGRAMS
   can_clone_file
   fopen_unchanged
   fseek
-  fuzz_main
   nonrandomopentest
   liboverride-test
 )
@@ -26,6 +25,10 @@ foreach(PROGRAM IN LISTS ZIP_PROGRAMS)
   add_executable(${PROGRAM} ${PROGRAM}.c)
   target_include_directories(${PROGRAM} PRIVATE BEFORE ${PROJECT_SOURCE_DIR}/lib ${PROJECT_BINARY_DIR})
   target_link_libraries(${PROGRAM} zip)
+  if (ENABLE_COVERAGE)
+    target_compile_options(${PROGRAM} PRIVATE -coverage)
+    target_link_options(${PROGRAM} PRIVATE -coverage)
+  endif()
 endforeach()
 
 # both programs using source_hole.c also use getopt
@@ -38,6 +41,10 @@ endif(NOT HAVE_GETOPT)
 
 foreach(PROGRAM IN LISTS HOLE_USERS)
   target_sources(${PROGRAM} PRIVATE source_hole.c)
+endforeach()
+
+foreach(PROGRAM IN LISTS FUZZ_PROGRAMS)
+  target_sources(${PROGRAM} PRIVATE fuzz_main.c)
 endforeach()
 
 # for including ziptool.c
@@ -95,6 +102,7 @@ foreach(FULL_CASE IN LISTS EXTRA_TESTS)
 endforeach()
 
 set(XFAIL_TESTS
+#  zipcmp_zip_dir_slash.test
 )
 
 foreach(CASE ${XFAIL_TESTS})
@@ -104,3 +112,13 @@ endforeach()
 add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
 
 configure_file(nihtest.conf.in nihtest.conf @ONLY)
+
+if(ENABLE_COVERAGE)
+  add_custom_target(coverage
+          # gather data
+          COMMAND ${LCOV} --directory . --capture --output-file coverage.info
+          # generate report
+          COMMAND ${GENHTML} --demangle-cpp -o coverage coverage.info WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+          COMMAND ${CMAKE_COMMAND} -E cmake_echo_color "Open coverage/index.html in browser to view results."
+  )
+endif()

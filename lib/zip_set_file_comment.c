@@ -1,6 +1,6 @@
 /*
   zip_set_file_comment.c -- set comment for file in archive
-  Copyright (C) 2006-2021 Dieter Baron and Thomas Klausner
+  Copyright (C) 2006-2022 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -32,6 +32,7 @@
 */
 
 
+/* LCOV_EXCL_START */
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 
@@ -44,3 +45,4 @@ zip_set_file_comment(zip_t *za, zip_uint64_t idx, const char *comment, int len) 
     }
     return zip_file_set_comment(za, idx, comment, (zip_uint16_t)len, 0);
 }
+/* LCOV_EXCL_STOP */
