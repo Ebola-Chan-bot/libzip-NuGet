@@ -390,6 +390,12 @@
     <ClCompile Include="..\..\lib\zip_winzip_aes.c">
       <Filter>源文件\lib</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lib\zip_realloc.c">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\zip_source_get_dostime.c">
+      <Filter>源文件\lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="config.h">
@@ -404,5 +410,8 @@
     <ClInclude Include="NuGetPack\build\native\include\zipconf.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\packages\StoneSteps.zLib.VS2022.Static.1.3.1.1\build\native\lib\x64\Debug\zlib.lib" />
   </ItemGroup>
 </Project>

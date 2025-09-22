@@ -124,7 +124,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
@@ -147,7 +147,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableModules>true</EnableModules>
@@ -230,6 +230,7 @@
     <ClCompile Include="..\..\lib\zip_random_unix.c" />
     <ClCompile Include="..\..\lib\zip_random_uwp.c" />
     <ClCompile Include="..\..\lib\zip_random_win32.c" />
+    <ClCompile Include="..\..\lib\zip_realloc.c" />
     <ClCompile Include="..\..\lib\zip_rename.c" />
     <ClCompile Include="..\..\lib\zip_replace.c" />
     <ClCompile Include="..\..\lib\zip_set_archive_comment.c" />
@@ -257,6 +258,7 @@
     <ClCompile Include="..\..\lib\zip_source_file_win32_utf8.c" />
     <ClCompile Include="..\..\lib\zip_source_free.c" />
     <ClCompile Include="..\..\lib\zip_source_function.c" />
+    <ClCompile Include="..\..\lib\zip_source_get_dostime.c" />
     <ClCompile Include="..\..\lib\zip_source_get_file_attributes.c" />
     <ClCompile Include="..\..\lib\zip_source_is_deleted.c" />
     <ClCompile Include="..\..\lib\zip_source_layered.c" />
@@ -297,6 +299,9 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="NuGetPack\build\native\include\zip.h" />
     <ClInclude Include="NuGetPack\build\native\include\zipconf.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\packages\StoneSteps.zLib.VS2022.Static.1.3.1.1\build\native\lib\$(Platform)\$(Configuration)\zlib.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
