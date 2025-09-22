@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
 	<metadata>
 		<id>nih_at.libzip</id>
-		<version>1.11.4.0</version>
+		<version>1.11.4.1</version>
 		<readme>README.md</readme>
 		<description>
 			A C library for reading, creating, and modifying zip archives.
@@ -15,7 +15,7 @@
 		<license type="file">LICENSE.txt</license>
 		<summary>A C library for reading, creating, and modifying zip archives.</summary>
 		<releaseNotes>
-			https://github.com/nih-at/libzip/releases/tag/v1.10.1
+			https://github.com/Ebola-Chan-bot/libzip-NuGet/releases/tag/v1.11.4.1
 		</releaseNotes>
 	</metadata>
 </package>
