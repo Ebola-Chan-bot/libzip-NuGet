@@ -7,4 +7,6 @@ libzip/NuGetPack/README.md
 libzip/NuGetPack/LICENSE.txt
 libzip/NuGetPack/build/native/include/zip.h
 libzip/*.nupkg
-# lib, pdb, and idb files are not excluded from Git because they are related to the VS platform toolset version. I guess they should be kept in Git to support as many versions of the VS platform toolset as possible.
+*.pdb
+*.idb
+*.lib

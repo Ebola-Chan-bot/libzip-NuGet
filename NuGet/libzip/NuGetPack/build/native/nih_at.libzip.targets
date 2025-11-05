@@ -8,20 +8,27 @@
 			<AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 		</ResourceCompile>
 	</ItemDefinitionGroup>
-	<Choose>
-		<When Condition="$(UseDebugLibraries)">
-			<ItemDefinitionGroup>
-				<Link>
-					<AdditionalDependencies>$(MSBuildThisFileDirectory)lib\libzip.$(PlatformToolsetVersion).Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
-				</Link>
-			</ItemDefinitionGroup>
-		</When>
-		<Otherwise>
-			<ItemDefinitionGroup>
-				<Link>
-					<AdditionalDependencies>$(MSBuildThisFileDirectory)lib\libzip.$(PlatformToolsetVersion).Release.lib;%(AdditionalDependencies)</AdditionalDependencies>
-				</Link>
-			</ItemDefinitionGroup>
-		</Otherwise>
-	</Choose>
+	<ItemGroup Condition="$(ConfigurationType)=='StaticLibrary'">
+		<PropertyPageSchema Include="$(MSBuildThisFileDirectory)\链接设置.xml" />
+	</ItemGroup>
+	<Target Name="埃博拉酱_LibZip_符号链接" BeforeTargets="Link" Condition="$(埃博拉酱_LibZip_链接方式)=='符号' Or $(ConfigurationType)!='StaticLibrary'">
+		<PropertyGroup>
+			<!--ItemGroup不能直接捕获ClCompile的属性，因此需要在这里传递-->
+			<RuntimeLibrary>%(ClCompile.RuntimeLibrary)</RuntimeLibrary>
+		</PropertyGroup>
+		<ItemGroup>
+			<Link Update="@(Link)">
+				<AdditionalDependencies>$(MSBuildThisFileDirectory)libzip.$(RuntimeLibrary).$(PlatformToolsetVersion).lib;%(AdditionalDependencies)</AdditionalDependencies>
+			</Link>
+		</ItemGroup>
+	</Target>
+	<Target Name="埃博拉酱_LibZip_内联链接" BeforeTargets="ClCompile" Condition="$(埃博拉酱_LibZip_链接方式)=='内联'">
+		<PropertyGroup>
+			<!--ItemGroup不能直接捕获ClCompile的属性，因此需要在这里传递-->
+			<RuntimeLibrary>%(ClCompile.RuntimeLibrary)</RuntimeLibrary>
+		</PropertyGroup>
+		<ItemGroup>
+			<Library Include="$(MSBuildThisFileDirectory)libzip.$(RuntimeLibrary).$(PlatformToolsetVersion).lib" />
+		</ItemGroup>
+	</Target>
 </Project>
