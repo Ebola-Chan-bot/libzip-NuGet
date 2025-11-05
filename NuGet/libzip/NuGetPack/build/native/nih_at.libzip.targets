@@ -22,7 +22,7 @@
 			</Link>
 		</ItemGroup>
 	</Target>
-	<Target Name="埃博拉酱_LibZip_内联链接" BeforeTargets="ClCompile" Condition="$(埃博拉酱_LibZip_链接方式)=='内联'">
+	<Target Name="埃博拉酱_LibZip_内联链接" AfterTargets="FixupCLCompileOptions" Condition="$(埃博拉酱_LibZip_链接方式)=='内联'">
 		<PropertyGroup>
 			<!--ItemGroup不能直接捕获ClCompile的属性，因此需要在这里传递-->
 			<RuntimeLibrary>%(ClCompile.RuntimeLibrary)</RuntimeLibrary>
