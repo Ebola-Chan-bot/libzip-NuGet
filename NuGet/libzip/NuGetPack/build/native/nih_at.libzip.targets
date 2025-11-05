@@ -22,7 +22,7 @@
 			</Link>
 		</ItemGroup>
 	</Target>
-	<Target Name="埃博拉酱_LibZip_内联链接" AfterTargets="FixupCLCompileOptions" Condition="$(EbolaChan_MariaDB_LinkMethod)=='内联'">
+	<Target Name="埃博拉酱_LibZip_内联链接" AfterTargets="FixupCLCompileOptions" Condition="$(EbolaChan_LibZip_LinkMethod)=='内联'">
 		<PropertyGroup>
 			<!--ItemGroup不能直接捕获ClCompile的属性，因此需要在这里传递-->
 			<RuntimeLibrary>%(ClCompile.RuntimeLibrary)</RuntimeLibrary>
